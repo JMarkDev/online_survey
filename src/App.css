@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, sans-serif, roboto;
+}
+
+html {
+  scroll-behavior: smooth;
+  color: #333333;
+}
+
+body {
+  background-color: #f2f2f2;
+}
