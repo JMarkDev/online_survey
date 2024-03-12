@@ -12,7 +12,7 @@ import {
 import Dropdown from "../components/Dropdown";
 import api from "../api/api";
 
-const Analytics = () => {
+const Analytics = ({ surveyData }) => {
   const COLORS = [
     "#e88245",
     "#8daa3b",
@@ -62,6 +62,25 @@ const Analytics = () => {
     setYear(year);
   };
 
+  function downloadCSV() {
+    const headers = ["Full Name", "Course", "Gender"];
+    const dataRows = surveyData.map((response) => {
+      return [response.fullname, response.course, response.gender];
+    });
+
+    const csvContent = [headers, ...dataRows]
+      .map((row) => row.join(","))
+      .join("\n");
+
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.download = "response.csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   return (
     <div
       style={
@@ -88,7 +107,11 @@ const Analytics = () => {
               </h2>
               <div className="flex gap-5">
                 <Dropdown handleYear={handleYear} />
-                <button className="p-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-5">
+                <button
+                  onClick={downloadCSV}
+                  type="button"
+                  className="p-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-5"
+                >
                   Download
                 </button>
               </div>

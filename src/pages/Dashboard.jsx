@@ -21,6 +21,7 @@ const Dashboard = () => {
         const response = await api.get("/survey/all");
         setResponseCount(response.data.length);
         setSurveyData(response.data);
+        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -56,7 +57,7 @@ const Dashboard = () => {
           <h1 className="text-lg font-semibold text-gray-800 mb-2">
             Survey Responses
           </h1>
-          <LineChart />
+          <LineChart surveyData={surveyData} />
         </div>
       </div>
       <div className="max-w-5xl mt-10 m-auto">
