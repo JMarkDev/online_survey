@@ -10,6 +10,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import Dropdown from "../components/Dropdown";
+import api from "../api/api";
 
 const Analytics = () => {
   const COLORS = [
@@ -33,30 +34,21 @@ const Analytics = () => {
     "#ffcc29",
     "#00a8cc",
   ];
-  const [strand, setStrand] = useState([]);
-  const [selectedYear, setSelectedYear] = useState(2024);
-  const [data, setData] = useState([
-    { month: "Jan", BSCS: 30, BSCRIM: 45, BSED: 60, BSSW: 30, BSPOLSCIE: 10 },
-    { month: "Feb", BSCS: 40, BSCRIM: 55, BSED: 40, BSSW: 25, BSPOLSCIE: 20 },
-    { month: "Mar", BSCS: 25, BSCRIM: 30, BSED: 50, BSSW: 50, BSPOLSCIE: 30 },
-    { month: "Apr", BSCS: 25, BSCRIM: 30, BSED: 50, BSSW: 50, BSPOLSCIE: 30 },
-    { month: "May", BSCS: 25, BSCRIM: 30, BSED: 50, BSSW: 50, BSPOLSCIE: 30 },
-    { month: "Jun", BSCS: 25, BSCRIM: 30, BSED: 50, BSSW: 50, BSPOLSCIE: 30 },
-    { month: "Jul", BSCS: 25, BSCRIM: 30, BSED: 50, BSSW: 50, BSPOLSCIE: 30 },
-    { month: "Aug", BSCS: 25, BSCRIM: 30, BSED: 50, BSSW: 50, BSPOLSCIE: 30 },
-    { month: "Sep", BSCS: 25, BSCRIM: 30, BSED: 50, BSSW: 50, BSPOLSCIE: 30 },
-    { month: "Oct", BSCS: 25, BSCRIM: 30, BSED: 50, BSSW: 50, BSPOLSCIE: 30 },
-    { month: "Nov", BSCS: 25, BSCRIM: 30, BSED: 50, BSSW: 50, BSPOLSCIE: 30 },
-    { month: "Dec", BSCS: 25, BSCRIM: 30, BSED: 50, BSSW: 50, BSPOLSCIE: 30 },
-  ]);
 
-  let colorIndex = 0;
+  const [data, setData] = useState([]);
+  const [year, setYear] = useState(new Date().getFullYear());
 
-  const getNextColor = () => {
-    const color = COLORS[colorIndex];
-    colorIndex = (colorIndex + 1) % COLORS.length;
-    return color;
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get(`/survey/total/${year}`);
+        setData(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, [year]);
 
   let graphColorIndex = 1;
 
@@ -66,22 +58,8 @@ const Analytics = () => {
     return color;
   };
 
-  const fetchDataStatatistics = async (year) => {
-    try {
-      const response = await api.get(`/strand/monthly/${year}`);
-      setData(response.data);
-      setSelectedYear(year);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    fetchDataStatatistics(selectedYear);
-  }, [selectedYear]);
-
-  const handleYearChange = (year) => {
-    fetchDataStatatistics(year);
+  const handleYear = (year) => {
+    setYear(year);
   };
 
   return (
@@ -109,7 +87,7 @@ const Analytics = () => {
                 Respondents Chart
               </h2>
               <div className="flex gap-5">
-                <Dropdown />
+                <Dropdown handleYear={handleYear} />
                 <button className="p-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-5">
                   Download
                 </button>

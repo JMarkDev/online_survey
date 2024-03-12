@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
@@ -6,12 +6,19 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Dropdown() {
+export default function Dropdown({ handleYear }) {
+  const [selectedYear, setSelectedYear] = useState(null);
+
+  const handleSelectYear = (year) => {
+    setSelectedYear(year);
+    handleYear(year); // Optionally, pass the selected year to a parent component
+  };
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-          Filter by year
+          Filter by year {selectedYear}
           <ChevronDownIcon
             className="-mr-1 h-5 w-5 text-gray-400"
             aria-hidden="true"
@@ -30,52 +37,11 @@ export default function Dropdown() {
       >
         <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            <Menu.Item>
-              {({ active }) => (
-                <button
-                  className={classNames(
-                    active
-                      ? "bg-gray-300 w-full text-center text-gray-900"
-                      : "text-gray-700",
-                    "block px-4 py-2 text-sm w-full"
-                  )}
-                >
-                  2024
-                </button>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <button
-                  className={classNames(
-                    active
-                      ? "bg-gray-300 w-full text-center text-gray-900"
-                      : "text-gray-700",
-                    "block px-4 py-2 text-sm w-full"
-                  )}
-                >
-                  2025
-                </button>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <button
-                  className={classNames(
-                    active
-                      ? "bg-gray-300 w-full text-center text-gray-900"
-                      : "text-gray-700",
-                    "block px-4 py-2 text-sm w-full"
-                  )}
-                >
-                  2026
-                </button>
-              )}
-            </Menu.Item>
-            <form method="POST" action="#">
-              <Menu.Item>
+            {[2024, 2025, 2026, 2027].map((year) => (
+              <Menu.Item key={year}>
                 {({ active }) => (
                   <button
+                    onClick={() => handleSelectYear(year)}
                     className={classNames(
                       active
                         ? "bg-gray-300 w-full text-center text-gray-900"
@@ -83,11 +49,11 @@ export default function Dropdown() {
                       "block px-4 py-2 text-sm w-full"
                     )}
                   >
-                    2027
+                    {year}
                   </button>
                 )}
               </Menu.Item>
-            </form>
+            ))}
           </div>
         </Menu.Items>
       </Transition>

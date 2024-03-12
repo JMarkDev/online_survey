@@ -18,13 +18,12 @@
         "Healthcare",
         "Finance",
         "Education",
-        "Arts and Entertainment",
-        "Other (please specify)"
+        "Arts and Entertainment"
       ]
     },
     {
       "id": "question3",
-      "question_text": "3. What factors are most important to you when considering a career? (Select all that apply)",
+      "question_text": "3. What factors are most important to you when considering a career?",
       "choices": [
         "Salary and benefits",
         "Opportunities for advancement",
@@ -42,15 +41,21 @@
         "Part-time jobs or volunteering",
         "Research opportunities",
         "Networking events and professional associations",
-        "Academic projects or coursework",
-        "Other (please specify)"
+        "Academic projects or coursework"
       ]
     },
     {
       "id": "question5",
-      "question_text": "5. Do you have any specific career milestones or achievements you hope to accomplish in the next 5 years?",
-      "choices": ["Yes", "No", "If yes, please briefly describe:"]
+      "question_text": "5. What specific career goals or milestones do you aim to achieve within the next 5 years?",
+      "choices": [
+        "Advance to a higher position in my current field",
+        "Transition to a new career path",
+        "Start my own business or entrepreneurial venture",
+        "Acquire additional certifications or qualifications",
+        "Undecided / Unsure"
+      ]
     },
+
     {
       "id": "question6",
       "question_text": "6. How important is ongoing professional development and learning for your career aspirations?",
@@ -64,14 +69,13 @@
     },
     {
       "id": "question7",
-      "question_text": "7. What challenges do you anticipate encountering in achieving your career goals? (Select all that apply)",
+      "question_text": "7. What challenges do you anticipate encountering in achieving your career goals?",
       "choices": [
         "Limited job opportunities in my desired field",
         "Lack of relevant experience",
         "Financial constraints",
         "Balancing work and personal commitments",
-        "Discrimination or bias in the workplace",
-        "Other (please specify)"
+        "Discrimination or bias in the workplace"
       ]
     },
     {
@@ -86,14 +90,13 @@
     },
     {
       "id": "question9",
-      "question_text": "9. What support or resources do you feel would be most beneficial in helping you achieve your career goals? (Select all that apply)",
+      "question_text": "9. What support or resources do you feel would be most beneficial in helping you achieve your career goals?",
       "choices": [
         "Career counseling or mentorship programs",
         "Networking opportunities with professionals in my desired field",
         "Access to job/internship postings and recruitment events",
         "Financial assistance or scholarships",
-        "Workshops or seminars on career development skills",
-        "Other (please specify)"
+        "Workshops or seminars on career development skills"
       ]
     },
     {
@@ -102,8 +105,7 @@
       "choices": [
         "Prioritize my career above other aspects of life",
         "Strive for a balance between career and personal life",
-        "Not sure / Haven't thought about it yet",
-        "Other (please specify)"
+        "Not sure / Haven't thought about it yet"
       ]
     }
   ]
