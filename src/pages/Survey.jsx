@@ -80,26 +80,34 @@ const Survey = () => {
   };
 
   const handleSelectAnswer = (questionId, choiceIndex, choice) => {
-    const answer = {
-      question_id: questionId,
-      question_text: questions.questions.find((q) => q.id === questionId)
-        .question_text,
-      answer_id: choiceIndex + 1,
-      answer_text: choice,
-    };
+    const selectedAnswers = values.answers[questionId] || [];
 
-    setValues((prevValues) => ({
-      ...prevValues,
-      answers: {
-        ...prevValues.answers,
-        [questionId]: answer, // Store selected answer for this question
-      },
-    }));
+    if (selectedAnswers.includes(choice)) {
+      // If already selected, remove it
+      const newAnswers = selectedAnswers.filter((answer) => answer !== choice);
+      setValues((prevValues) => ({
+        ...prevValues,
+        answers: {
+          ...prevValues.answers,
+          [questionId]: newAnswers,
+        },
+      }));
+    } else {
+      // If not selected, add it
+      const newAnswers = [...selectedAnswers, choice];
+      setValues((prevValues) => ({
+        ...prevValues,
+        answers: {
+          ...prevValues.answers,
+          [questionId]: newAnswers,
+        },
+      }));
+    }
   };
 
-  const isAnswered = (questionId) => {
-    return values.answers.hasOwnProperty(questionId);
-  };
+  // const isAnswered = (questionId) => {
+  //   return values.answers.hasOwnProperty(questionId);
+  // };
 
   return (
     <div className="m-5 ">
@@ -182,6 +190,7 @@ const Survey = () => {
                   <option value="BSCS">
                     Bachelor of Science in Computer Science
                   </option>
+                  <option value="ACT">Associate in Computer Technology</option>
                   <option value="BSED">
                     Bachelor of Science in Elementary Education
                   </option>
@@ -194,6 +203,7 @@ const Survey = () => {
                   <option value="BSCRIM">
                     Bachelor of Science in Criminology
                   </option>
+                  <option value="ABFIL">Bachelor of Arts in Filipino</option>
                   {/* <option value="ACT">Associate in Computer Technology</option> */}
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -269,9 +279,7 @@ const Survey = () => {
           </h1>
           {questions.questions.map((question) => (
             <div
-              // className={`question mb-6 ${
-              //   !isAnswered(question.id) ? "bg-red-500" : ""
-              // }`}
+              className="mt-5 bg-white p-5 rounded-lg hover:shadow-xl"
               key={question.id}
             >
               <label
@@ -284,17 +292,14 @@ const Survey = () => {
                 {question.choices.map((choice, choiceIndex) => (
                   <div className="flex items-center mb-2" key={choiceIndex}>
                     <input
-                      type="radio"
+                      type={question.choices.length <= 5 ? "radio" : "checkbox"}
                       id={`${question.id}-${choiceIndex}`}
                       name={question.id}
-                      className="mr-2 cursor-pointer h-4 w-4 accent-blue-600 form-radio"
+                      className="mr-2 cursor-pointer h-4 w-4 accent-blue-600 form-checkbox"
                       onChange={() =>
                         handleSelectAnswer(question.id, choiceIndex, choice)
                       }
-                      checked={
-                        values.answers[question.id]?.answer_id ===
-                        choiceIndex + 1
-                      }
+                      checked={values.answers[question.id]?.includes(choice)}
                     />
                     <label
                       htmlFor={`${question.id}-${choiceIndex}`}
@@ -307,9 +312,10 @@ const Survey = () => {
               </div>
             </div>
           ))}
+
           <button
             type="submit"
-            className="mb-5 btn bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-md shadow-md transition duration-300 ease-in-out"
+            className="mb-5 mt-5 btn bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-md shadow-md transition duration-300 ease-in-out"
           >
             Submit
           </button>

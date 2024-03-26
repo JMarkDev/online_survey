@@ -34,6 +34,7 @@ export default function ApexChart() {
     "Secure a full-time job in my field of study",
     "Start my own business or freelance",
     "Undecided / Unsure",
+    "Explore different career paths",
   ];
 
   // Calculate total occurrences for each answer

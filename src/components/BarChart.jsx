@@ -28,6 +28,11 @@ const BarChart = () => {
         "Finance",
         "Education",
         "Arts and Entertainment",
+        "Environmental Science",
+        "Marketing and Advertising",
+        "Law and Legal Services",
+        "Hospitality and Tourism",
+        "Manufacturing and Engineering",
       ];
 
       const newSeries = answerTexts.map((answerText) =>
@@ -57,7 +62,18 @@ const BarChart = () => {
         height: 350,
         type: "bar",
       },
-      colors: ["#008FFB", "#00E396", "#333A73", "#FF4560", "#775DD0"],
+      colors: [
+        "#008FFB",
+        "#00E396",
+        "#FFD700",
+        "#FF6384",
+        "#36A2EB",
+        "#FF00FF",
+        "#FF4500",
+        "#7CFC00",
+        "#FF1493",
+        "#9400D3",
+      ],
       plotOptions: {
         bar: {
           columnWidth: "45%",
@@ -75,12 +91,28 @@ const BarChart = () => {
           ["Technology"],
           ["Healthcare"],
           ["Finance"],
-          "Education",
+          ["Education"],
           ["Arts and Entertainment"],
+          ["Environmental Science"],
+          ["Marketing and Advertising"],
+          ["Law and Legal Services"],
+          ["Hospitality and Tourism"],
+          ["Manufacturing and Engineering"],
         ],
         labels: {
           style: {
-            colors: ["#008FFB", "#00E396", "#333A73", "#FF4560", "#775DD0"],
+            colors: [
+              "#008FFB",
+              "#00E396",
+              "#FFD700",
+              "#FF6384",
+              "#36A2EB",
+              "#FF00FF",
+              "#FF4500",
+              "#7CFC00",
+              "#FF1493",
+              "#9400D3",
+            ],
             fontSize: "12px",
           },
         },

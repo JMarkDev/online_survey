@@ -28,6 +28,11 @@ const ApexChart = () => {
         "Job security",
         "Impact and purpose",
         "Flexibility and autonomy",
+        "Company culture",
+        "Location",
+        "Learning and growth opportunities",
+        "Job satisfaction",
+        "Social responsibility of the organization",
       ];
 
       const newSeries = answerTexts.map((answerText) =>
@@ -69,6 +74,11 @@ const ApexChart = () => {
           "Job security",
           "Impact and purpose",
           "Flexibility and autonomy",
+          "Company culture",
+          "Location",
+          "Learning and growth opportunities",
+          "Job satisfaction",
+          "Social responsibility of the organization",
         ],
         labels: {
           style: {

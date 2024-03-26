@@ -1,7 +1,7 @@
 import "./App.css";
 import Survey from "./pages/Survey";
 import Dashboard from "./pages/Dashboard";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 
 function App() {

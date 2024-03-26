@@ -7,7 +7,8 @@
         "Pursue further education (e.g., graduate school)",
         "Secure a full-time job in my field of study",
         "Start my own business or freelance",
-        "Undecided / Unsure"
+        "Undecided / Unsure",
+        "Explore different career paths"
       ]
     },
     {
@@ -18,7 +19,12 @@
         "Healthcare",
         "Finance",
         "Education",
-        "Arts and Entertainment"
+        "Arts and Entertainment",
+        "Environmental Science",
+        "Marketing and Advertising",
+        "Law and Legal Services",
+        "Hospitality and Tourism",
+        "Manufacturing and Engineering"
       ]
     },
     {
@@ -30,7 +36,12 @@
         "Work-life balance",
         "Job security",
         "Impact and purpose",
-        "Flexibility and autonomy"
+        "Flexibility and autonomy",
+        "Company culture",
+        "Location",
+        "Learning and growth opportunities",
+        "Job satisfaction",
+        "Social responsibility of the organization"
       ]
     },
     {
@@ -41,7 +52,10 @@
         "Part-time jobs or volunteering",
         "Research opportunities",
         "Networking events and professional associations",
-        "Academic projects or coursework"
+        "Academic projects or coursework",
+        "Freelance work or side projects",
+        "Mentorship programs",
+        "Online courses or certifications"
       ]
     },
     {
@@ -52,7 +66,8 @@
         "Transition to a new career path",
         "Start my own business or entrepreneurial venture",
         "Acquire additional certifications or qualifications",
-        "Undecided / Unsure"
+        "Undecided / Unsure",
+        "Lead a team or project"
       ]
     },
 
@@ -63,8 +78,8 @@
         "Very important",
         "Somewhat important",
         "Neutral",
-        "Not very important",
-        "Not important at all"
+        "Not important at all",
+        "Essential for staying competitive"
       ]
     },
     {
@@ -75,7 +90,8 @@
         "Lack of relevant experience",
         "Financial constraints",
         "Balancing work and personal commitments",
-        "Discrimination or bias in the workplace"
+        "Discrimination or bias in the workplace",
+        "Technological advancements impacting job prospects"
       ]
     },
     {
@@ -85,7 +101,8 @@
         "It is my primary source of fulfillment",
         "It is one aspect contributing to my overall satisfaction",
         "Neutral / Unsure",
-        "It is not a significant factor in my overall satisfaction"
+        "It is not a significant factor in my overall satisfaction",
+        "My career aligns with my personal values and passions"
       ]
     },
     {
@@ -96,7 +113,10 @@
         "Networking opportunities with professionals in my desired field",
         "Access to job/internship postings and recruitment events",
         "Financial assistance or scholarships",
-        "Workshops or seminars on career development skills"
+        "Workshops or seminars on career development skills",
+        "Industry-specific training programs",
+        "Support for entrepreneurship and startups",
+        "Peer support groups or communities"
       ]
     },
     {
@@ -105,7 +125,11 @@
       "choices": [
         "Prioritize my career above other aspects of life",
         "Strive for a balance between career and personal life",
-        "Not sure / Haven't thought about it yet"
+        "Not sure / Haven't thought about it yet",
+        "Focus equally on career and personal growth",
+        "Incorporate leisure and hobbies into my career plan",
+        "Seek flexible work arrangements for better balance",
+        "Ensure family and relationships are a priority"
       ]
     }
   ]
