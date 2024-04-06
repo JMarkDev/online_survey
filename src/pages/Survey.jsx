@@ -19,6 +19,8 @@ const Survey = () => {
   const [genderError, setGenderError] = useState("");
   const [answerError, setAnswerError] = useState("");
 
+  // console.log(values.answers);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -82,32 +84,48 @@ const Survey = () => {
   const handleSelectAnswer = (questionId, choiceIndex, choice) => {
     const selectedAnswers = values.answers[questionId] || [];
 
-    if (selectedAnswers.includes(choice)) {
-      // If already selected, remove it
-      const newAnswers = selectedAnswers.filter((answer) => answer !== choice);
+    if (
+      questions.questions.find((q) => q.id === questionId).choices.length <= 5
+    ) {
+      // Radio input logic (only one choice can be selected)
       setValues((prevValues) => ({
         ...prevValues,
         answers: {
           ...prevValues.answers,
-          [questionId]: newAnswers,
+          [questionId]: [choice],
         },
       }));
     } else {
-      // If not selected, add it
-      const newAnswers = [...selectedAnswers, choice];
-      setValues((prevValues) => ({
-        ...prevValues,
-        answers: {
-          ...prevValues.answers,
-          [questionId]: newAnswers,
-        },
-      }));
+      // Checkbox input logic (at least three choices required)
+      if (selectedAnswers.includes(choice)) {
+        // If already selected, remove it
+        const newAnswers = selectedAnswers.filter(
+          (answer) => answer !== choice
+        );
+        setValues((prevValues) => ({
+          ...prevValues,
+          answers: {
+            ...prevValues.answers,
+            [questionId]: newAnswers,
+          },
+        }));
+      } else {
+        if (selectedAnswers.length >= 3) {
+          toast.error("You can only select 3 choices.");
+          return;
+        }
+        // If not selected, add it
+        const newAnswers = [...selectedAnswers, choice];
+        setValues((prevValues) => ({
+          ...prevValues,
+          answers: {
+            ...prevValues.answers,
+            [questionId]: newAnswers,
+          },
+        }));
+      }
     }
   };
-
-  // const isAnswered = (questionId) => {
-  //   return values.answers.hasOwnProperty(questionId);
-  // };
 
   return (
     <div className="m-5 ">
@@ -203,7 +221,7 @@ const Survey = () => {
                   <option value="BSCRIM">
                     Bachelor of Science in Criminology
                   </option>
-                  <option value="ABFIL">Bachelor of Arts in Filipino</option>
+                  <option value="AB FIL">Bachelor of Arts in Filipino</option>
                   {/* <option value="ACT">Associate in Computer Technology</option> */}
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -279,7 +297,7 @@ const Survey = () => {
           </h1>
           {questions.questions.map((question) => (
             <div
-              className="mt-5 bg-white p-5 rounded-lg hover:shadow-xl"
+              className="relative mt-5 bg-white p-5 rounded-lg hover:shadow-xl"
               key={question.id}
             >
               <label
@@ -288,25 +306,37 @@ const Survey = () => {
               >
                 {question.question_text}
               </label>
+              {question.choices.length > 5 && (
+                <p className=" text-red-500 text-sm mt-[-5px] py-2">
+                  Please choose at least 3 options.
+                </p>
+              )}
               <div className="options">
                 {question.choices.map((choice, choiceIndex) => (
-                  <div className="flex items-center mb-2" key={choiceIndex}>
-                    <input
-                      type={question.choices.length <= 5 ? "radio" : "checkbox"}
-                      id={`${question.id}-${choiceIndex}`}
-                      name={question.id}
-                      className="mr-2 cursor-pointer h-4 w-4 accent-blue-600 form-checkbox"
-                      onChange={() =>
-                        handleSelectAnswer(question.id, choiceIndex, choice)
-                      }
-                      checked={values.answers[question.id]?.includes(choice)}
-                    />
-                    <label
-                      htmlFor={`${question.id}-${choiceIndex}`}
-                      className="cursor-pointer"
-                    >
-                      {choice}
-                    </label>
+                  <div
+                    className="flex flex-col items-left mb-2 hover:bg-gray-300 rounded-md cursor-pointer"
+                    key={choiceIndex}
+                  >
+                    <div className="flex items-center pl-2">
+                      <input
+                        type={
+                          question.choices.length <= 5 ? "radio" : "checkbox"
+                        }
+                        id={`${question.id}-${choiceIndex}`}
+                        name={question.id}
+                        className="mr-2 cursor-pointer h-4 w-4 accent-blue-600 form-checkbox"
+                        onChange={() =>
+                          handleSelectAnswer(question.id, choiceIndex, choice)
+                        }
+                        checked={values.answers[question.id]?.includes(choice)}
+                      />
+                      <label
+                        htmlFor={`${question.id}-${choiceIndex}`}
+                        className="cursor-pointer  w-full py-2"
+                      >
+                        {choice}
+                      </label>
+                    </div>
                   </div>
                 ))}
               </div>

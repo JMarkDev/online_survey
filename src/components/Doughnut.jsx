@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import api from "../api/api";
+import questions from "../questions/question.json";
 
 export default function ApexChart() {
   const [surveyData, setSurveyData] = useState([]);
 
+  // Fetch survey data from API when component mounts
   useEffect(() => {
     const fetchResponse = async () => {
       try {
@@ -14,34 +16,41 @@ export default function ApexChart() {
         console.log(error);
       }
     };
+
     fetchResponse();
   }, []);
 
+  // Function to calculate total occurrences of an answer text for a specific question
   const calculateTotalOccurrences = (questionId, answerText) => {
+    // Initialize total occurrences count
     let totalOccurrences = 0;
+
+    // Loop through surveyData to count occurrences
     surveyData.forEach((entry) => {
-      if (entry.answers[questionId]?.answer_text === answerText) {
+      // Check if the entry has an answer for the specified questionId and it matches the answerText
+      if (
+        entry.answers[questionId] &&
+        entry.answers[questionId].includes(answerText)
+      ) {
+        // Increment totalOccurrences if the answer matches
         totalOccurrences++;
       }
     });
+
     return totalOccurrences;
   };
 
-  // Example question ID and answer texts
-  const questionId = "question1";
-  const answerTexts = [
-    "Pursue further education (e.g., graduate school)",
-    "Secure a full-time job in my field of study",
-    "Start my own business or freelance",
-    "Undecided / Unsure",
-    "Explore different career paths",
-  ];
+  // Retrieve question details from questions.json (assuming question1 is the first question)
+  const question1 = questions.questions[0];
+  const questionId = question1.id;
+  const answerTexts = question1.choices;
 
-  // Calculate total occurrences for each answer
+  // Calculate total occurrences for each answer text in the question
   const series = answerTexts.map((answerText) =>
     calculateTotalOccurrences(questionId, answerText)
   );
 
+  // Chart options with labels and chart type
   const options = {
     chart: {
       type: "donut",
@@ -51,11 +60,12 @@ export default function ApexChart() {
 
   return (
     <div id="chart">
+      {/* Render Chart component with computed options and series */}
       <Chart
         options={options}
-        width={"100%"}
         series={series}
         type="donut"
+        width={"100%"}
         height={350}
       />
     </div>
