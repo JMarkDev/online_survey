@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../../src/App.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import questions from "../questions/question.json";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import api from "../api/api";
+import Loading from "../components/loading/Loading";
 
 const Survey = () => {
+  const [loading, setLoading] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const navigate = useNavigate();
   const [values, setValues] = useState({
     fullname: "",
@@ -14,15 +17,20 @@ const Survey = () => {
     gender: "",
     answers: [],
   });
+
   const [fullnameError, setFullnameError] = useState("");
   const [courseError, setCourseError] = useState("");
   const [genderError, setGenderError] = useState("");
   const [answerError, setAnswerError] = useState("");
 
   // console.log(values.answers);
+  const handleTermsCheck = (event) => {
+    setTermsAccepted(event.target.checked);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     setFullnameError("");
     setCourseError("");
@@ -48,10 +56,12 @@ const Survey = () => {
         toast.success("Survey submitted successfully");
         setTimeout(() => {
           navigate("/Dashboard");
+          setLoading(false);
         }, 2000);
         setFormSubmitted(true);
       }
     } catch (error) {
+      console.log("error");
       if (error.response && error.response.data.status === "error") {
         setFullnameError(error.response.data.message);
       }
@@ -78,6 +88,8 @@ const Survey = () => {
         });
       }
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -128,10 +140,10 @@ const Survey = () => {
   };
 
   return (
-    <div className="m-5 ">
+    <div className="">
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -140,10 +152,9 @@ const Survey = () => {
         draggable
         pauseOnHover
         theme="light"
-        // transition: Bounce
       />
       <ToastContainer />
-      <div className=" container bg-gray-300 max-w-2xl my-5 m-auto">
+      <div className="container bg-gray-300 max-w-2xl my-4 pb-4 m-auto">
         <header className="bg-gray-700 text-white py-6 px-4 rounded-t-lg">
           <h1 className="text-lg md:text-2xl font-bold leading-tight">
             Understanding the Extracurricular Interests of WMSU Students
@@ -210,6 +221,9 @@ const Survey = () => {
                   </option>
                   <option value="ACT">Associate in Computer Technology</option>
                   <option value="BSED">
+                    Bachelor of Science in Secondary Education
+                  </option>
+                  <option value="BEED">
                     Bachelor of Science in Elementary Education
                   </option>
                   <option value="BSSW">
@@ -343,11 +357,39 @@ const Survey = () => {
             </div>
           ))}
 
+          <div className="mt-4 flex items-center">
+            <input
+              type="checkbox"
+              id="terms"
+              checked={termsAccepted}
+              onChange={handleTermsCheck}
+              className="cursor-pointer h-4 w-4 accent-blue-600 form-checkbox"
+            />
+            <label htmlFor="terms" className="ml-2">
+              I read and accept the{" "}
+              <Link
+                to="/terms-condition"
+                className="text-blue-600 border-blue-700 border-b "
+              >
+                Terms & Condition
+              </Link>
+            </label>
+          </div>
           <button
+            disabled={!termsAccepted || loading} // Disable button if terms are not accepted or if loading is true
             type="submit"
-            className="mb-5 mt-5 btn bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-md shadow-md transition duration-300 ease-in-out"
+            className={`${
+              !termsAccepted || loading
+                ? "cursor-not-allowed opacity-50"
+                : "cursor-pointer"
+            } relative items-center w-full justify-center flex my-4 btn bg-blue-500 hover:bg-blue-600 text-white font-semibold px-12 py-2 rounded-md shadow-md transition duration-300 ease-in-out`}
           >
-            Submit
+            Submit{" "}
+            {loading && (
+              <div className="h-6 ml-4 absolute right-0">
+                <Loading />
+              </div>
+            )}
           </button>
         </form>
       </div>

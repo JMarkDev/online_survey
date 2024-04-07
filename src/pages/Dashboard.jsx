@@ -6,13 +6,15 @@ import api from "../api/api";
 import ApexChart from "../components/BarChartQ2";
 import DoughnutQuestion3 from "../components/DoughnutQuestion3";
 import BarChartQ4 from "../components/BarchartQ4";
+import DoughtnutQ6 from "../components/DoughnutQ6";
+import questions from "../questions/question.json";
 
 const Dashboard = () => {
   const [surveyData, setSurveyData] = useState([]);
   const [responseCount, setResponseCount] = useState(0);
   const cardsData = [
     { title: "Total Responses", count: responseCount },
-    { title: "Total Course", count: 5 },
+    { title: "Total Course", count: 8 },
     { title: "Total Questions", count: 10 },
   ];
 
@@ -22,7 +24,6 @@ const Dashboard = () => {
         const response = await api.get("/survey/all");
         setResponseCount(response.data.length);
         setSurveyData(response.data);
-        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -49,6 +50,105 @@ const Dashboard = () => {
 
     return totalOccurrences;
   };
+
+  function downloadCSV() {
+    const headers = ["Category", "Total"];
+
+    const question1 = questions.questions[0];
+    const questionId = question1.id;
+    const answerTexts = question1.choices;
+
+    // Calculate total occurrences for each answer text in the question
+    const series = answerTexts.map((answerText) =>
+      calculateTotalOccurrences(questionId, answerText)
+    );
+
+    // Combine categories and totals into an array of arrays (rows)
+    const dataRows = answerTexts.map((answerText, index) => [
+      answerText,
+      series[index],
+    ]);
+
+    // Prepare CSV content
+    const csvContent = [headers, ...dataRows.map((row) => row.join(","))].join(
+      "\n"
+    );
+
+    // Create and download CSV file
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.download = "data.csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  function downloadCSVDoughnut2() {
+    const headers = ["Category", "Total"];
+
+    const question3 = questions.questions[2];
+    const questionId = question3.id;
+    const answerTexts = question3.choices;
+
+    // Calculate total occurrences for each answer text in the question
+    const series = answerTexts.map((answerText) =>
+      calculateTotalOccurrences(questionId, answerText)
+    );
+
+    // Combine categories and totals into an array of arrays (rows)
+    const dataRows = answerTexts.map((answerText, index) => [
+      answerText,
+      series[index],
+    ]);
+
+    // Prepare CSV content
+    const csvContent = [headers, ...dataRows.map((row) => row.join(","))].join(
+      "\n"
+    );
+
+    // Create and download CSV file
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.download = "data.csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  function downloadCSVQ6() {
+    const headers = ["Category", "Total"];
+
+    const question6 = questions.questions[5];
+    const questionId = question6.id;
+    const answerTexts = question6.choices;
+
+    // Calculate total occurrences for each answer text in the question
+    const series = answerTexts.map((answerText) =>
+      calculateTotalOccurrences(questionId, answerText)
+    );
+
+    // Combine categories and totals into an array of arrays (rows)
+    const dataRows = answerTexts.map((answerText, index) => [
+      answerText,
+      series[index],
+    ]);
+
+    // Prepare CSV content
+    const csvContent = [headers, ...dataRows.map((row) => row.join(","))].join(
+      "\n"
+    );
+
+    // Create and download CSV file
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.download = "data.csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 
   return (
     <>
@@ -83,9 +183,18 @@ const Dashboard = () => {
       </div>
       <div className="max-w-5xl mt-10 m-auto">
         <div className="bg-white rounded-lg shadow-md">
-          <h1 className="text-lg p-6 font-semibold text-gray-800 mb-2">
-            Primary career goal upon completing education
-          </h1>
+          <div className="flex justify-between items-center">
+            <h1 className="text-lg p-6 font-semibold text-gray-800 mb-2">
+              Primary career goal upon completing education
+            </h1>
+            <button
+              onClick={downloadCSV}
+              className="mr-4 text-sm bg-blue-600 hover:bg-blue-800 text-white h-10 rounded-lg px-4"
+            >
+              Download CSV
+            </button>
+          </div>
+
           <Doughnut
             surveyData={surveyData}
             data={surveyData}
@@ -105,10 +214,19 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="max-w-5xl mt-10 m-auto">
-        <div className="bg-white rounded-lg p-6 shadow-md">
-          <h1 className="text-lg font-semibold text-gray-800 mb-2">
-            Most important factors when considering a career
-          </h1>
+        <div className="bg-white rounded-lg p-6 shadow-md ">
+          <div className="flex justify-between">
+            <h1 className="text-lg font-semibold text-gray-800 mb-2">
+              Most important factors when considering a career
+            </h1>
+            <button
+              onClick={downloadCSVDoughnut2}
+              className="mr-4 text-sm bg-blue-600 hover:bg-blue-800 text-white h-10 rounded-lg px-4"
+            >
+              Download CSV
+            </button>
+          </div>
+
           <DoughnutQuestion3
             surveyData={surveyData}
             calculateTotalOccurrences={calculateTotalOccurrences}
@@ -121,6 +239,27 @@ const Dashboard = () => {
             Methods for Gaining Relevant Career Experience
           </h1>
           <BarChartQ4
+            surveyData={surveyData}
+            calculateTotalOccurrences={calculateTotalOccurrences}
+          />
+        </div>
+      </div>
+      <div className="max-w-5xl mt-10 m-auto">
+        <div className="bg-white rounded-lg p-6 shadow-md">
+          <div className="flex justify-between items-center">
+            <h1 className="text-lg font-semibold text-gray-800 mb-2">
+              Importance Professional Development and Learning for Career
+              Aspirations
+            </h1>
+            <button
+              onClick={downloadCSVQ6}
+              className="mr-4 text-sm bg-blue-600 hover:bg-blue-800 text-white h-10 rounded-lg px-4"
+            >
+              Download CSV
+            </button>
+          </div>
+
+          <DoughtnutQ6
             surveyData={surveyData}
             calculateTotalOccurrences={calculateTotalOccurrences}
           />

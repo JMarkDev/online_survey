@@ -3,6 +3,7 @@ import Survey from "./pages/Survey";
 import Dashboard from "./pages/Dashboard";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from "./pages/NotFound";
+import TermsCondition from "./pages/TermsCondition";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route path="/" element={<Survey />} />
           <Route path="/survey" element={<Survey />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/terms-condition" element={<TermsCondition />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </Router>
