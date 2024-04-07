@@ -164,7 +164,7 @@ const Survey = () => {
           theme="light"
         />
         <ToastContainer />
-        <div className="container bg-gray-300 max-w-2xl my-4 pb-4 m-auto">
+        <div className="container bg-gradient-to-r from-blue-200 to-cyan-200 max-w-2xl my-4 pb-4 m-auto">
           <header className="bg-gray-700 text-white py-6 px-4 rounded-t-lg">
             <h1 className="text-lg md:text-2xl font-bold leading-tight">
               Understanding the Extracurricular Interests of WMSU Students
