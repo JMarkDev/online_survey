@@ -6,9 +6,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import api from "../api/api";
 import Loading from "../components/loading/Loading";
+import TermsCondition from "./TermsCondition";
+import Thankyou from "./Thankyou";
 
 const Survey = () => {
   const [loading, setLoading] = useState(false);
+  const [modal, setModal] = useState(true);
+  const [thankyou, setThankyou] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const navigate = useNavigate();
   const [values, setValues] = useState({
@@ -17,6 +21,10 @@ const Survey = () => {
     gender: "",
     answers: [],
   });
+
+  const closeModal = () => {
+    setModal(false);
+  };
 
   const [fullnameError, setFullnameError] = useState("");
   const [courseError, setCourseError] = useState("");
@@ -58,6 +66,7 @@ const Survey = () => {
 
       if (response.data.status === "success") {
         toast.success("Survey submitted successfully");
+        setThankyou(true);
         setTimeout(() => {
           navigate("/Dashboard");
           setLoading(false);
@@ -150,6 +159,8 @@ const Survey = () => {
           <Loading />
         </div>
       )}
+      {thankyou && <Thankyou />}
+      {modal && <TermsCondition openModal={closeModal} />}
       <div className="">
         <ToastContainer
           position="top-right"
@@ -376,32 +387,11 @@ const Survey = () => {
               </div>
             ))}
 
-            <div className="mt-4 flex items-center">
-              <input
-                type="checkbox"
-                id="terms"
-                checked={termsAccepted}
-                onChange={handleTermsCheck}
-                className="cursor-pointer h-4 w-4 accent-blue-600 form-checkbox"
-              />
-              <label htmlFor="terms" className="ml-2">
-                I read and accept the{" "}
-                <Link
-                  to="/terms-condition"
-                  className="text-blue-600 border-blue-700 border-b "
-                >
-                  Terms & Condition
-                </Link>
-              </label>
-            </div>
             <button
-              disabled={!termsAccepted} // Disable button if terms are not accepted or if loading is true
               type="submit"
-              className={`${
-                !termsAccepted
-                  ? "cursor-not-allowed opacity-50"
-                  : "cursor-pointer"
-              } relative items-center w-full justify-center flex my-4 btn bg-blue-500 hover:bg-blue-600 text-white font-semibold px-12 py-2 rounded-md shadow-md transition duration-300 ease-in-out`}
+              className="
+              relative items-center w-full justify-center flex my-4 btn bg-blue-700 hover:bg-blue-800 text-white font-semibold px-12 py-2 rounded-md shadow-md transition duration-300 ease-in-out`}
+            "
             >
               Submit{" "}
             </button>
