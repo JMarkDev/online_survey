@@ -8,6 +8,7 @@ import DoughnutQuestion3 from "../components/DoughnutQuestion3";
 import BarChartQ4 from "../components/BarchartQ4";
 import DoughtnutQ6 from "../components/DoughnutQ6";
 import questions from "../questions/question.json";
+import PieChart from "../components/PieChart";
 
 const Dashboard = () => {
   const [surveyData, setSurveyData] = useState([]);
@@ -150,6 +151,39 @@ const Dashboard = () => {
     document.body.removeChild(link);
   }
 
+  function downloadCSVQ6Pie() {
+    const headers = ["Category", "Total"];
+
+    const question = questions.questions[4];
+    const questionId = question.id;
+    const answerTexts = question.choices;
+
+    // Calculate total occurrences for each answer text in the question
+    const series = answerTexts.map((answerText) =>
+      calculateTotalOccurrences(questionId, answerText)
+    );
+
+    // Combine categories and totals into an array of arrays (rows)
+    const dataRows = answerTexts.map((answerText, index) => [
+      answerText,
+      series[index],
+    ]);
+
+    // Prepare CSV content
+    const csvContent = [headers, ...dataRows.map((row) => row.join(","))].join(
+      "\n"
+    );
+
+    // Create and download CSV file
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.download = "data.csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   return (
     <>
       <div className="bg-gray-200 shadow-lg p-4 flex justify-between">
@@ -260,6 +294,26 @@ const Dashboard = () => {
           </div>
 
           <DoughtnutQ6
+            surveyData={surveyData}
+            calculateTotalOccurrences={calculateTotalOccurrences}
+          />
+        </div>
+      </div>
+      <div className="max-w-5xl mt-10 m-auto">
+        <div className="bg-white rounded-lg p-6 shadow-md">
+          <div className="flex justify-between items-center">
+            <h1 className="text-lg font-semibold text-gray-800 mb-2">
+              Career Goals and Milestones for the Next 5 Years
+            </h1>
+            <button
+              onClick={downloadCSVQ6Pie}
+              className="mr-4 text-sm bg-blue-600 hover:bg-blue-800 text-white h-10 rounded-lg px-4"
+            >
+              Download CSV
+            </button>
+          </div>
+
+          <PieChart
             surveyData={surveyData}
             calculateTotalOccurrences={calculateTotalOccurrences}
           />

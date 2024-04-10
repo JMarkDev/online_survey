@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import questions from "../questions/question.json";
 
-export default function ApexChart({ calculateTotalOccurrences }) {
+export default function ApexChart({ calculateTotalOccurrences, surveyData }) {
   // Retrieve question details from questions.json (assuming question1 is the first question)
 
-  const question3 = questions.questions[2];
-  const questionId = question3.id;
-  const answerTexts = question3.choices;
+  const question = questions.questions[4];
+  const questionId = question.id;
+  const answerTexts = question.choices;
 
   // Calculate total occurrences for each answer text in the question
   const series = answerTexts.map((answerText) =>
@@ -25,13 +25,12 @@ export default function ApexChart({ calculateTotalOccurrences }) {
     "#7CFC00",
     "#FF1493",
     "#9400D3",
-    "#8576FF",
   ];
 
   // Chart options with labels and chart type
   const options = {
     chart: {
-      type: "donut",
+      type: "pie",
     },
     labels: answerTexts,
     colors: colorList,
@@ -43,7 +42,7 @@ export default function ApexChart({ calculateTotalOccurrences }) {
       <Chart
         options={options}
         series={series}
-        type="donut"
+        type="pie"
         width={"100%"}
         height={350}
       />
