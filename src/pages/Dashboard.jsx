@@ -207,7 +207,7 @@ const Dashboard = () => {
           ))}
         </div>
       </div>
-      <div className="max-w-5xl mt-10 m-auto">
+      <div className="max-w-7xl mt-10 m-auto">
         <div className="bg-white rounded-lg p-6 shadow-md">
           <h1 className="text-lg font-semibold text-gray-800 mb-2">
             Survey Responses
@@ -215,7 +215,7 @@ const Dashboard = () => {
           <LineChart surveyData={surveyData} />
         </div>
       </div>
-      <div className="max-w-5xl mt-10 m-auto">
+      <div className="max-w-7xl mt-10 m-auto">
         <div className="bg-white rounded-lg shadow-md">
           <div className="flex justify-between items-center">
             <h1 className="text-lg p-6 font-semibold text-gray-800 mb-2">
@@ -236,7 +236,7 @@ const Dashboard = () => {
           />
         </div>
       </div>
-      <div className="max-w-5xl mt-10 m-auto">
+      <div className="max-w-7xl mt-10 m-auto">
         <div className="bg-white rounded-lg p-6 shadow-md">
           <h1 className="text-lg font-semibold text-gray-800 mb-2">
             Industry or field are most interested in pursuing a career
@@ -247,7 +247,7 @@ const Dashboard = () => {
           />
         </div>
       </div>
-      <div className="max-w-5xl mt-10 m-auto">
+      <div className="max-w-7xl mt-10 m-auto">
         <div className="bg-white rounded-lg p-6 shadow-md ">
           <div className="flex justify-between">
             <h1 className="text-lg font-semibold text-gray-800 mb-2">
@@ -267,7 +267,7 @@ const Dashboard = () => {
           />
         </div>
       </div>
-      <div className="max-w-5xl mt-10 m-auto">
+      <div className="max-w-7xl mt-10 m-auto">
         <div className="bg-white rounded-lg p-6 shadow-md">
           <h1 className="text-lg font-semibold text-gray-800 mb-2">
             Methods for Gaining Relevant Career Experience
@@ -278,7 +278,7 @@ const Dashboard = () => {
           />
         </div>
       </div>
-      <div className="max-w-5xl mt-10 m-auto">
+      <div className="max-w-7xl mt-10 m-auto">
         <div className="bg-white rounded-lg p-6 shadow-md">
           <div className="flex justify-between items-center">
             <h1 className="text-lg font-semibold text-gray-800 mb-2">
@@ -299,7 +299,7 @@ const Dashboard = () => {
           />
         </div>
       </div>
-      <div className="max-w-5xl mt-10 m-auto">
+      <div className="max-w-7xl mt-10 m-auto">
         <div className="bg-white rounded-lg p-6 shadow-md">
           <div className="flex justify-between items-center">
             <h1 className="text-lg font-semibold text-gray-800 mb-2">

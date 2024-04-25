@@ -1,43 +1,50 @@
 import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import questions from "../questions/question.json";
+import BarChartByCourse from "../components/BarchartByCourse";
 
 export default function ApexChart({ surveyData }) {
+  // Retrieve question details from questions.json (assuming question1 is the first question)
+
   const question = questions.questions[4];
+  const questionId = question.id;
   const answerTexts = question.choices;
-  const [series, setSeries] = useState([]);
-  const [course, setCourse] = useState("");
+
+  const [series2, setSeries2] = useState([]);
+  const [course, setCourse] = useState("ACT");
+  const [bscs, setBSCS] = useState("BSCS");
+  const [filterBSCS, setFilterBSCS] = useState([]);
+  const [bsed, setBSED] = useState("BSED");
+  const [filterBSED, setFilterBSED] = useState([]);
+  const [beed, setBEED] = useState("BEED");
+  const [filterBEED, setFilterBEED] = useState([]);
+  const [bssw, setBSSW] = useState("BSSW");
+  const [filterBSSW, setFilterBSSW] = useState([]);
+  const [BSPOLSCIE, setBSPOLSCIE] = useState("BSPOLSCIE");
+  const [filterBSPOLSCIE, setFilterBSPOLSCIE] = useState([]);
+  const [BSCRIM, setBSCRIM] = useState("BSCRIM");
+  const [filterBSCRIM, setFilterBSCRIM] = useState([]);
+  const [abfil, setabfil] = useState("AB FIL");
+  const [filterabfil, setFilterabfil] = useState([]);
   const [filteredSurveyData, setFilteredSurveyData] = useState([]);
 
-  const colorList = [
-    "#1C1678",
-    "#00E396",
-    "#FFD700",
-    "#FF6384",
-    "#36A2EB",
-    "#FF00FF",
-    "#6C0345",
-    "#7CFC00",
-    "#FF1493",
-    "#9400D3",
-  ];
-
-  // Chart options with labels and chart type
-  const options = {
-    chart: {
-      type: "pie",
-    },
-    labels: answerTexts,
-    colors: colorList,
-  };
-
-  // Function to handle course selection change
-  const handleCourseChange = (event) => {
-    setCourse(event.target.value);
-  };
-
   // Function to calculate total occurrences of an answer text for a specific question within filtered survey data
-  const calculateTotalOccurrences = (questionId, answerText, data) => {
+  const calculateTotalOccurrences = (questionId, answerText) => {
+    let totalOccurrences = 0;
+
+    surveyData.forEach((entry) => {
+      if (
+        entry.answers[questionId] &&
+        entry.answers[questionId].includes(answerText)
+      ) {
+        totalOccurrences++;
+      }
+    });
+
+    return totalOccurrences;
+  };
+
+  const calculateTotalOccurrences2 = (questionId, answerText, data) => {
     let totalOccurrences = 0;
 
     data.forEach((entry) => {
@@ -55,71 +62,193 @@ export default function ApexChart({ surveyData }) {
   useEffect(() => {
     // Filter surveyData based on selected course
     const filterSurveyDataByCourse = () => {
-      if (!course) {
-        // If no course is selected, use the original surveyData
-        setFilteredSurveyData(surveyData);
-      } else {
-        // Filter surveyData based on selected course
-        const filteredData = surveyData.filter(
-          (entry) => entry.course === course
-        );
-        setFilteredSurveyData(filteredData);
-      }
+      // Filter surveyData based on selected course
+      const filteredData = surveyData.filter(
+        (entry) => entry.course === course
+      );
+      setFilteredSurveyData(filteredData);
     };
 
     filterSurveyDataByCourse();
   }, [surveyData, course]);
 
   useEffect(() => {
+    // Filter surveyData based on selected course
+    const filterSurveyDataByCourse = () => {
+      // Filter surveyData based on selected course
+      const filteredData = surveyData.filter(
+        (entry) => entry.course === course
+      );
+      setFilteredSurveyData(filteredData);
+    };
+
+    filterSurveyDataByCourse();
+  }, [surveyData, course]);
+
+  useEffect(() => {
+    // Filter surveyData based on selected course
+    const filterSurveyDataByCourse = () => {
+      // Filter surveyData based on selected course
+      const filteredData = surveyData.filter((entry) => entry.course === bscs);
+      setFilterBSCS(filteredData);
+    };
+
+    filterSurveyDataByCourse();
+  }, [surveyData, bscs]);
+
+  useEffect(() => {
+    // Filter surveyData based on selected course
+    const filterSurveyDataByCourse = () => {
+      // Filter surveyData based on selected course
+      const filteredData = surveyData.filter((entry) => entry.course === bsed);
+      setFilterBSED(filteredData);
+    };
+
+    filterSurveyDataByCourse();
+  }, [surveyData, bsed]);
+
+  useEffect(() => {
+    // Filter surveyData based on selected course
+    const filterSurveyDataByCourse = () => {
+      // Filter surveyData based on selected course
+      const filteredData = surveyData.filter((entry) => entry.course === beed);
+      setFilterBEED(filteredData);
+    };
+
+    filterSurveyDataByCourse();
+  }, [surveyData, beed]);
+
+  useEffect(() => {
+    // Filter surveyData based on selected course
+    const filterSurveyDataByCourse = () => {
+      // Filter surveyData based on selected course
+      const filteredData = surveyData.filter((entry) => entry.course === bssw);
+      setFilterBSSW(filteredData);
+    };
+
+    filterSurveyDataByCourse();
+  }, [surveyData, bssw]);
+
+  useEffect(() => {
+    // Filter surveyData based on selected course
+    const filterSurveyDataByCourse = () => {
+      // Filter surveyData based on selected course
+      const filteredData = surveyData.filter(
+        (entry) => entry.course === BSPOLSCIE
+      );
+      setFilterBSPOLSCIE(filteredData);
+    };
+
+    filterSurveyDataByCourse();
+  }, [surveyData, BSPOLSCIE]);
+
+  useEffect(() => {
+    // Filter surveyData based on selected course
+    const filterSurveyDataByCourse = () => {
+      // Filter surveyData based on selected course
+      const filteredData = surveyData.filter(
+        (entry) => entry.course === BSCRIM
+      );
+      setFilterBSCRIM(filteredData);
+    };
+
+    filterSurveyDataByCourse();
+  }, [surveyData, BSCRIM]);
+
+  useEffect(() => {
+    // Filter surveyData based on selected course
+    const filterSurveyDataByCourse = () => {
+      // Filter surveyData based on selected course
+      const filteredData = surveyData.filter((entry) => entry.course === abfil);
+      setFilterabfil(filteredData);
+    };
+
+    filterSurveyDataByCourse();
+  }, [surveyData, abfil]);
+
+  useEffect(() => {
     // Calculate series based on filteredSurveyData
     const calculateSeries = () => {
-      const question = questions.questions[4];
-      const questionId = question.id;
-      const answerTexts = question.choices;
-
       const newSeries = answerTexts.map((answerText) =>
-        calculateTotalOccurrences(questionId, answerText, filteredSurveyData)
+        calculateTotalOccurrences2(questionId, answerText, filteredSurveyData)
       );
 
-      setSeries(newSeries);
+      setSeries2(newSeries);
     };
 
     calculateSeries();
   }, [filteredSurveyData]);
 
+  // Calculate total occurrences for each answer text in the question
+  const series = answerTexts.map((answerText) =>
+    calculateTotalOccurrences(questionId, answerText)
+  );
+
+  const colorList = [
+    "#1C1678",
+    "#00E396",
+    "#FFD700",
+    "#FF6384",
+    "#36A2EB",
+    "#FF00FF",
+    "#6C0345",
+    "#7CFC00",
+    "#FF1493",
+    "#9400D3",
+  ];
+
+  const options = {
+    chart: {
+      type: "pie",
+    },
+    labels: answerTexts,
+    colors: colorList,
+  };
+
   return (
     <div id="chart">
-      <div className="my-6">
-        <select
-          name="course"
-          id="course"
-          onChange={handleCourseChange}
-          className="border-gray-400 border p-2 rounded-lg w-full"
-        >
-          <option value="">Default</option>
-          <option value="BSCS">Bachelor of Science in Computer Science</option>
-          <option value="ACT">Associate in Computer Technology</option>
-          <option value="BSED">
-            Bachelor of Science in Secondary Education
-          </option>
-          <option value="BEED">
-            Bachelor of Science in Elementary Education
-          </option>
-          <option value="BSSW">Bachelor of Science in Social Work</option>
-          <option value="BSPOLSCIE">
-            Bachelor of Science in Political Science
-          </option>
-          <option value="BSCRIM">Bachelor of Science in Criminology</option>
-          <option value="AB FIL">Bachelor of Arts in Filipino</option>
-        </select>
-      </div>
       <Chart
         options={options}
         series={series}
         type="pie"
         width={"100%"}
-        height={350}
+        height={400}
       />
+
+      <div className="grid grid-cols-4 gap-4">
+        <div className="mt-10 bg-gray-200">
+          <h1 className="font-bold text-xl">ACT</h1>
+          <BarChartByCourse surveyData={filteredSurveyData} />
+        </div>
+        <div className="mt-10 bg-gray-200">
+          <h1 className="font-bold text-xl">BSCS</h1>
+          <BarChartByCourse surveyData={filterBSCS} />
+        </div>
+        <div className="mt-10 bg-gray-200">
+          <h1 className="font-bold text-xl">BSED</h1>
+          <BarChartByCourse surveyData={filterBSED} />
+        </div>
+        <div className="mt-10 bg-gray-200">
+          <h1 className="font-bold text-xl">BEED</h1>
+          <BarChartByCourse surveyData={filterBEED} />
+        </div>
+        <div className="mt-10 bg-gray-200">
+          <h1 className="font-bold text-xl">BSSW</h1>
+          <BarChartByCourse surveyData={filterBSSW} />
+        </div>
+        <div className="mt-10 bg-gray-200">
+          <h1 className="font-bold text-xl">BSPOLSCIE</h1>
+          <BarChartByCourse surveyData={filterBSPOLSCIE} />
+        </div>
+        <div className="mt-10 bg-gray-200">
+          <h1 className="font-bold text-xl">BSCRIM</h1>
+          <BarChartByCourse surveyData={filterBSCRIM} />
+        </div>
+        <div className="mt-10 bg-gray-200">
+          <h1 className="font-bold text-xl">AB FIL</h1>
+          <BarChartByCourse surveyData={filterabfil} />
+        </div>
+      </div>
     </div>
   );
 }

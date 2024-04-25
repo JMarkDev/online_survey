@@ -63,9 +63,47 @@ const Analytics = ({ surveyData }) => {
   };
 
   function downloadCSV() {
-    const headers = ["Full Name", "Course", "Gender"];
+    const headers = [
+      "Full Name",
+      "Course",
+      "Gender",
+      "Primary career goal",
+      "Industry or field are most interested in pursuing a career",
+      "Most important factors when considering a career",
+      "Methods for Gaining Relevant Career Experience",
+      "Career Goals and Milestones for the Next 5 Years",
+      "Career Development Importance",
+      "Challenges in Achieving Career Goals",
+      "Career Fulfillment and Life Satisfaction Survey",
+      "Career Goal Support and Resources",
+      "Balancing Career Aspirations and Life Priorities",
+    ];
+
+    // Function to properly format each field for CSV
+    const formatFieldForCSV = (field) => {
+      // If the field contains a comma, period, or other special characters, wrap it in double quotes
+      if (/[,"]/.test(field)) {
+        return `"${field}"`;
+      }
+      return field;
+    };
+
     const dataRows = surveyData.map((response) => {
-      return [`${response.fullname}, ${response.course}, ${response.gender}`];
+      return [
+        formatFieldForCSV(response.fullname),
+        formatFieldForCSV(response.course),
+        formatFieldForCSV(response.gender),
+        formatFieldForCSV(response.answers.question1),
+        formatFieldForCSV(response.answers.question2),
+        formatFieldForCSV(response.answers.question3),
+        formatFieldForCSV(response.answers.question4),
+        formatFieldForCSV(response.answers.question5),
+        formatFieldForCSV(response.answers.question6),
+        formatFieldForCSV(response.answers.question7),
+        formatFieldForCSV(response.answers.question8),
+        formatFieldForCSV(response.answers.question9),
+        formatFieldForCSV(response.answers.question10),
+      ];
     });
 
     const csvContent = [headers, ...dataRows]
@@ -129,7 +167,7 @@ const Analytics = ({ surveyData }) => {
               overflowX: "auto",
             }}
           >
-            <ResponsiveContainer width={950} height={400}>
+            <ResponsiveContainer width={1200} height={400}>
               <LineChart
                 data={data}
                 margin={{
