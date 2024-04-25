@@ -65,7 +65,7 @@ const Analytics = ({ surveyData }) => {
   function downloadCSV() {
     const headers = ["Full Name", "Course", "Gender"];
     const dataRows = surveyData.map((response) => {
-      return [response.fullname, response.course, response.gender];
+      return [`${response.fullname}, ${response.course}, ${response.gender}`];
     });
 
     const csvContent = [headers, ...dataRows]
