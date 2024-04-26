@@ -56,6 +56,12 @@ const BarChart = ({ surveyData }) => {
     "#9400D3",
   ];
 
+  const answerTexts = questions.questions[1].choices;
+  const indexCategories = Array.from(
+    { length: answerTexts.length },
+    (_, i) => i + 1
+  );
+
   const chartData = {
     series: [{ data: series }],
     options: {
@@ -77,11 +83,18 @@ const BarChart = ({ surveyData }) => {
         show: false,
       },
       xaxis: {
-        // categories: questions.questions[4].choices,
+        categories: indexCategories,
         labels: {
           style: {
             colors: colorList,
             fontSize: "12px",
+          },
+        },
+      },
+      yaxis: {
+        labels: {
+          formatter: function (val) {
+            return val;
           },
         },
       },

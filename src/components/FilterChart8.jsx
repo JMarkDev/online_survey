@@ -29,7 +29,7 @@ const BarChart = ({ surveyData }) => {
   useEffect(() => {
     // Calculate series only when surveyData changes
     const calculateSeries = () => {
-      const question2 = questions.questions[4];
+      const question2 = questions.questions[7];
       const questionId = question2.id;
       const answerTexts = question2.choices;
 
@@ -44,19 +44,19 @@ const BarChart = ({ surveyData }) => {
   }, [surveyData]);
 
   const colorList = [
-    "#008FFB",
+    "#1C1678",
     "#00E396",
     "#FFD700",
     "#FF6384",
     "#36A2EB",
     "#FF00FF",
-    "#FF4500",
+    "#6C0345",
     "#7CFC00",
     "#FF1493",
     "#9400D3",
   ];
 
-  const answerTexts = questions.questions[4].choices;
+  const answerTexts = questions.questions[7].choices;
   const indexCategories = Array.from(
     { length: answerTexts.length },
     (_, i) => i + 1
@@ -88,6 +88,13 @@ const BarChart = ({ surveyData }) => {
           style: {
             colors: colorList,
             fontSize: "12px",
+          },
+        },
+      },
+      yaxis: {
+        labels: {
+          formatter: function (val) {
+            return val;
           },
         },
       },

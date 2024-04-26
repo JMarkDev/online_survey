@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import questions from "../questions/question.json";
-import FilterChart4 from "../components/FilterChart4";
+import FilterChart10 from "../components/FilterChart10";
 
 export default function ApexChart({ surveyData }) {
   // Retrieve question details from questions.json (assuming question1 is the first question)
 
-  const question = questions.questions[3];
+  const question = questions.questions[9];
   const questionId = question.id;
   const answerTexts = question.choices;
 
@@ -195,7 +195,6 @@ export default function ApexChart({ surveyData }) {
     "#7CFC00",
     "#FF1493",
     "#9400D3",
-    "#8576FF",
   ];
 
   const options = {
@@ -219,35 +218,35 @@ export default function ApexChart({ surveyData }) {
       <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-4">
         <div className="mt-10 bg-gray-200">
           <h1 className="font-bold text-xl">ACT</h1>
-          <FilterChart4 surveyData={filteredSurveyData} />
+          <FilterChart10 surveyData={filteredSurveyData} />
         </div>
         <div className="mt-10 bg-gray-200">
           <h1 className="font-bold text-xl">BSCS</h1>
-          <FilterChart4 surveyData={filterBSCS} />
+          <FilterChart10 surveyData={filterBSCS} />
         </div>
         <div className="mt-10 bg-gray-200">
           <h1 className="font-bold text-xl">BSED</h1>
-          <FilterChart4 surveyData={filterBSED} />
+          <FilterChart10 surveyData={filterBSED} />
         </div>
         <div className="mt-10 bg-gray-200">
           <h1 className="font-bold text-xl">BEED</h1>
-          <FilterChart4 surveyData={filterBEED} />
+          <FilterChart10 surveyData={filterBEED} />
         </div>
         <div className="mt-10 bg-gray-200">
           <h1 className="font-bold text-xl">BSSW</h1>
-          <FilterChart4 surveyData={filterBSSW} />
+          <FilterChart10 surveyData={filterBSSW} />
         </div>
         <div className="mt-10 bg-gray-200">
           <h1 className="font-bold text-xl">BSPOLSCIE</h1>
-          <FilterChart4 surveyData={filterBSPOLSCIE} />
+          <FilterChart10 surveyData={filterBSPOLSCIE} />
         </div>
         <div className="mt-10 bg-gray-200">
           <h1 className="font-bold text-xl">BSCRIM</h1>
-          <FilterChart4 surveyData={filterBSCRIM} />
+          <FilterChart10 surveyData={filterBSCRIM} />
         </div>
         <div className="mt-10 bg-gray-200">
           <h1 className="font-bold text-xl">AB FIL</h1>
-          <FilterChart4 surveyData={filterabfil} />
+          <FilterChart10 surveyData={filterabfil} />
         </div>
       </div>
     </div>

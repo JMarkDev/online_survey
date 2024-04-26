@@ -85,6 +85,13 @@ const BarChart = ({ surveyData }) => {
           },
         },
       },
+      yaxis: {
+        labels: {
+          formatter: function (val) {
+            return val;
+          },
+        },
+      },
     },
   };
 

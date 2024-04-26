@@ -9,6 +9,10 @@ import BarChartQ4 from "../components/BarchartQ4";
 import DoughtnutQ6 from "../components/DoughnutQ6";
 import questions from "../questions/question.json";
 import PieChart from "../components/PieChart";
+import DoughnutChart7 from "../components/DoughnutChart7";
+import DougnutChart8 from "../components/DoughnutChart8";
+import DougnutChart9 from "../components/DoughnutChart9";
+import DougnutChart10 from "../components/DougnutChart10";
 
 const Dashboard = () => {
   const [surveyData, setSurveyData] = useState([]);
@@ -314,6 +318,62 @@ const Dashboard = () => {
           </div>
 
           <PieChart
+            surveyData={surveyData}
+            calculateTotalOccurrences={calculateTotalOccurrences}
+          />
+        </div>
+      </div>
+      <div className="max-w-7xl mt-10 m-auto">
+        <div className="bg-white rounded-lg p-6 shadow-md">
+          <div className="flex justify-between items-center">
+            <h1 className="text-lg font-semibold text-gray-800 mb-2">
+              Challenges in Achieving Career Goals
+            </h1>
+          </div>
+
+          <DoughnutChart7
+            surveyData={surveyData}
+            calculateTotalOccurrences={calculateTotalOccurrences}
+          />
+        </div>
+      </div>
+      <div className="max-w-7xl mt-10 m-auto">
+        <div className="bg-white rounded-lg p-6 shadow-md">
+          <div className="flex justify-between items-center">
+            <h1 className="text-lg font-semibold text-gray-800 mb-2">
+              Career Fulfillment and Life Satisfaction
+            </h1>
+          </div>
+
+          <DougnutChart8
+            surveyData={surveyData}
+            calculateTotalOccurrences={calculateTotalOccurrences}
+          />
+        </div>
+      </div>
+      <div className="max-w-7xl mt-10 m-auto">
+        <div className="bg-white rounded-lg p-6 shadow-md">
+          <div className="flex justify-between items-center">
+            <h1 className="text-lg font-semibold text-gray-800 mb-2">
+              Career Goal Support and Resources
+            </h1>
+          </div>
+
+          <DougnutChart9
+            surveyData={surveyData}
+            calculateTotalOccurrences={calculateTotalOccurrences}
+          />
+        </div>
+      </div>
+      <div className="max-w-7xl mt-10 m-auto">
+        <div className="bg-white rounded-lg p-6 shadow-md">
+          <div className="flex justify-between items-center">
+            <h1 className="text-lg font-semibold text-gray-800 mb-2">
+              Balancing Career Aspirations and Life Priorities
+            </h1>
+          </div>
+
+          <DougnutChart10
             surveyData={surveyData}
             calculateTotalOccurrences={calculateTotalOccurrences}
           />

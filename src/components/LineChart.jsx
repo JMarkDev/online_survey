@@ -74,7 +74,7 @@ const Analytics = ({ surveyData }) => {
       "Career Goals and Milestones for the Next 5 Years",
       "Career Development Importance",
       "Challenges in Achieving Career Goals",
-      "Career Fulfillment and Life Satisfaction Survey",
+      "Career Fulfillment and Life Satisfaction",
       "Career Goal Support and Resources",
       "Balancing Career Aspirations and Life Priorities",
     ];
